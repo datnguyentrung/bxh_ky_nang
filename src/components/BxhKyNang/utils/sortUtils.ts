@@ -59,7 +59,7 @@ export function sortPlayersByRank(
     });
 }
 
-export function getPlayerRank(players: Bxh[], targetPlayer: Bxh): number {
+export function getPlayerRank(targetPlayer: Bxh): number {
     return targetPlayer.rank;
 }
 
