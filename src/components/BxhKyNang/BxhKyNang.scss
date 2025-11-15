@@ -1,0 +1,210 @@
+@import './styles/variables';
+@import './styles/mixins';
+
+.bxh-kynang {
+    min-height: 100vh;
+    background: linear-gradient(135deg,
+            rgba($primary-red, 0.05) 0%,
+            rgba($secondary-red, 0.03) 50%,
+            rgba($primary-white, 1) 100%);
+    padding: $spacing-xl $spacing-md;
+    font-family: $font-primary;
+
+    @include responsive(sm) {
+        padding: $spacing-xl $spacing-lg;
+    }
+
+    @include responsive(md) {
+        padding: $spacing-xxl $spacing-xl;
+    }
+
+    &__header {
+        max-width: 1200px;
+        margin: 0 auto $spacing-xxl;
+        text-align: center;
+
+        @include slide-up(0.6s);
+    }
+
+    &__title-section {
+        margin-bottom: $spacing-xl;
+    }
+
+    &__title {
+        font-size: 2rem;
+        font-weight: $font-weight-black;
+        @include text-gradient($primary-red, $secondary-red);
+        margin: 0 0 $spacing-md;
+        letter-spacing: -0.02em;
+
+        @include responsive(sm) {
+            font-size: 2.5rem;
+        }
+
+        @include responsive(md) {
+            font-size: 3rem;
+        }
+    }
+
+    &__subtitle {
+        font-size: 1rem;
+        color: $medium-gray;
+        margin: 0;
+        font-weight: $font-weight-medium;
+
+        @include responsive(sm) {
+            font-size: 1.1rem;
+        }
+
+        @include responsive(md) {
+            font-size: 1.2rem;
+        }
+    }
+
+    &__stats-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $spacing-md;
+        max-width: 600px;
+        margin: 0 auto;
+
+        @include responsive(md) {
+            grid-template-columns: repeat(4, 1fr);
+            max-width: 800px;
+            gap: $spacing-lg;
+        }
+    }
+
+    &__stat-card {
+        @include card-base;
+        @include flex-center;
+        flex-direction: column;
+        padding: $spacing-lg;
+        text-align: center;
+        background: linear-gradient(135deg, $primary-white 0%, rgba($light-red, 0.1) 100%);
+        border: 1px solid rgba($primary-red, 0.1);
+        transition: all 0.3s ease;
+
+        &:hover {
+            @include card-hover;
+            border-color: rgba($primary-red, 0.3);
+        }
+    }
+
+    &__stat-value {
+        font-size: 1.75rem;
+        font-weight: $font-weight-bold;
+        @include text-gradient($primary-red, $secondary-red);
+        margin-bottom: $spacing-xs;
+
+        @include responsive(md) {
+            font-size: 2rem;
+        }
+    }
+
+    &__stat-label {
+        font-size: 0.875rem;
+        color: $medium-gray;
+        font-weight: $font-weight-medium;
+
+        @include responsive(md) {
+            font-size: 0.9rem;
+        }
+    }
+
+    &__content {
+        max-width: 1200px;
+        margin: 0 auto;
+
+        @include slide-up(0.8s);
+    }
+
+    &__footer {
+        max-width: 1200px;
+        margin: $spacing-xxl auto 0;
+        text-align: center;
+        padding-top: $spacing-xl;
+        border-top: 1px solid $border-gray;
+
+        &-text {
+            color: $medium-gray;
+            font-size: 0.875rem;
+            margin: 0;
+        }
+    }
+
+    // Loading state
+    &__loading {
+        @include flex-center;
+        flex-direction: column;
+        padding: $spacing-xxl;
+
+        &-spinner {
+            width: 40px;
+            height: 40px;
+            border: 3px solid $light-gray;
+            border-top-color: $primary-red;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: $spacing-lg;
+        }
+
+        &-text {
+            color: $medium-gray;
+            font-size: 1rem;
+            margin: 0;
+        }
+    }
+
+    // Error state
+    &__error {
+        @include flex-center;
+        flex-direction: column;
+        padding: $spacing-xxl;
+        text-align: center;
+
+        &-icon {
+            font-size: 4rem;
+            margin-bottom: $spacing-lg;
+            opacity: 0.7;
+        }
+
+        &-title {
+            font-size: 1.5rem;
+            font-weight: $font-weight-bold;
+            color: $dark-gray;
+            margin: 0 0 $spacing-md;
+        }
+
+        &-text {
+            color: $medium-gray;
+            font-size: 1rem;
+            margin: 0 0 $spacing-xl;
+            max-width: 400px;
+        }
+
+        &-retry {
+            @include button-primary;
+            padding: $spacing-md $spacing-xl;
+            font-size: 1rem;
+        }
+    }
+}
+
+// Animations
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+// Animation delays for staggered appearance
+.bxh-kynang__stat-card {
+    animation: slide-up 0.6s ease-out;
+
+    @for $i from 1 through 4 {
+        &:nth-child(#{$i}) {
+            animation-delay: #{($i - 1) * 0.1 + 0.2}s;
+        }
+    }
+}

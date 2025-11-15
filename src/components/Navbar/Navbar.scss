@@ -1,0 +1,118 @@
+@import '../BxhKyNang/styles/variables';
+@import '../BxhKyNang/styles/mixins';
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: $z-navbar;
+    background: linear-gradient(135deg, $primary-red 0%, $secondary-red 100%);
+    box-shadow: $shadow-lg;
+    backdrop-filter: blur(10px);
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: $spacing-md $spacing-lg;
+        @include flex-between;
+
+        @include responsive(sm) {
+            padding: $spacing-lg $spacing-xl;
+        }
+    }
+
+    &__logo {
+        @include flex-center;
+        gap: $spacing-sm;
+        color: $primary-white;
+
+        &-icon {
+            font-size: 1.75rem;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.2));
+        }
+
+        &-text {
+            font-family: $font-primary;
+            font-size: 1.25rem;
+            font-weight: $font-weight-bold;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+
+            @include responsive(sm) {
+                font-size: 1.5rem;
+            }
+        }
+    }
+
+    &__title {
+        flex: 1;
+        text-align: center;
+        color: $primary-white;
+        font-family: $font-primary;
+        font-size: 1.1rem;
+        font-weight: $font-weight-bold;
+        margin: 0;
+        text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+        padding: 0 $spacing-md;
+
+        @include responsive(sm) {
+            font-size: 1.3rem;
+        }
+
+        @include responsive(md) {
+            font-size: 1.5rem;
+        }
+    }
+
+    &__actions {
+        @include flex-center;
+    }
+
+    &__menu-btn {
+        @include flex-column;
+        gap: 3px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: $spacing-sm;
+        border-radius: $radius-sm;
+        transition: all 0.3s ease;
+
+        &:hover {
+            background: rgba($primary-white, 0.1);
+        }
+
+        span {
+            width: 20px;
+            height: 2px;
+            background: $primary-white;
+            border-radius: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        &:hover span {
+            background: rgba($primary-white, 0.9);
+        }
+
+        @include responsive(md) {
+            span {
+                width: 24px;
+                height: 3px;
+            }
+        }
+    }
+}
+
+// Navbar height compensation for other components
+.navbar-spacer {
+    height: 70px;
+
+    @include responsive(sm) {
+        height: 80px;
+    }
+
+    @include responsive(md) {
+        height: 90px;
+    }
+}
