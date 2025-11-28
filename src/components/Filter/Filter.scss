@@ -3,8 +3,6 @@
 
 .filter {
     margin-top: 5rem;
-    position: sticky;
-    top: 70px;
     width: 300px;
     height: fit-content;
     max-height: calc(100vh - 90px);
@@ -13,7 +11,22 @@
     box-shadow: $shadow-md;
     padding: $spacing-xl;
     overflow-y: auto;
-    z-index: 100;
+
+    // Default: sticky for large screens only
+    @media (min-width: 1024px) {
+        position: sticky;
+        top: 70px;
+        z-index: 100;
+    }
+
+    // Non-sticky for all screens below 1024px
+    @media (max-width: 1023px) {
+        position: static;
+        width: 100%;
+        margin-top: $spacing-xl;
+        margin-bottom: $spacing-lg;
+        z-index: auto;
+    }
 
     // Custom scrollbar
     &::-webkit-scrollbar {
@@ -141,21 +154,30 @@
         margin-bottom: $spacing-lg;
         padding: $spacing-lg;
         box-shadow: $shadow-sm;
+        z-index: auto;
     }
 
-    @include tablet-down {
+    // Tablet responsive - no sticky behavior
+    @media (min-width: 640px) and (max-width: 1023px) {
         position: relative;
         top: 0;
         width: 100%;
         max-height: none;
         margin-top: $spacing-xl;
         margin-bottom: $spacing-lg;
+        z-index: auto;
+        padding: $spacing-lg;
+        box-shadow: $shadow-sm;
     }
 
+    // Desktop and above - sticky behavior enabled
     @include responsive(lg) {
         position: sticky;
         top: 70px;
         width: 300px;
         margin-top: 5rem;
+        z-index: 100;
+        padding: $spacing-xl;
+        box-shadow: $shadow-md;
     }
 }
