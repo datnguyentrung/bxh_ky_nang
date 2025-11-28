@@ -55,10 +55,16 @@ export default function BxhKyNang({
             const isMobile = window.innerWidth <= 639;
             if (isMobile) {
                 const timer = setTimeout(() => {
-                    componentRef.current?.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                    if (componentRef.current) {
+                        const navbarHeight = 10; // Height of navbar on mobile
+                        const elementTop = componentRef.current.offsetTop;
+                        const offsetPosition = elementTop - navbarHeight;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
                 }, 300); // Small delay for smooth experience
 
                 return () => clearTimeout(timer);
