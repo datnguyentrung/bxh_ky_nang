@@ -74,7 +74,7 @@
     }
 }
 
-// Responsive mixins
+// Responsive mixins (Mobile-first)
 @mixin responsive($breakpoint) {
     @if $breakpoint ==sm {
         @media (min-width: $breakpoint-sm) {
@@ -98,6 +98,76 @@
         @media (min-width: $breakpoint-xl) {
             @content;
         }
+    }
+}
+
+// Mobile-only mixin
+@mixin mobile-only {
+    @media (max-width: #{$breakpoint-sm - 1px}) {
+        @content;
+    }
+}
+
+// Tablet and below
+@mixin tablet-down {
+    @media (max-width: #{$breakpoint-md - 1px}) {
+        @content;
+    }
+}
+
+// Tablet only
+@mixin tablet-only {
+    @media (min-width: $breakpoint-sm) and (max-width: #{$breakpoint-md - 1px}) {
+        @content;
+    }
+}
+
+// Desktop and above
+@mixin desktop-up {
+    @media (min-width: $breakpoint-lg) {
+        @content;
+    }
+}
+
+// Hide on mobile
+@mixin hide-mobile {
+    @include mobile-only {
+        display: none !important;
+    }
+}
+
+// Show only on mobile
+@mixin show-mobile-only {
+    display: none;
+
+    @include mobile-only {
+        display: block;
+    }
+}
+
+// Responsive font size
+@mixin responsive-font($mobile, $tablet, $desktop) {
+    font-size: $mobile;
+
+    @include responsive(sm) {
+        font-size: $tablet;
+    }
+
+    @include responsive(md) {
+        font-size: $desktop;
+    }
+}
+
+// Responsive spacing
+@mixin responsive-spacing($property, $mobile, $tablet, $desktop) {
+    #{$property}: $mobile;
+
+    @include responsive(sm) {
+        #{$property}: $tablet;
+    }
+
+    @include responsive(md) {
+        #{$property}: $desktop;
     }
 }
 

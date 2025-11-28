@@ -35,16 +35,25 @@
     }
 
     &__search {
-        margin-bottom: $spacing-lg;
+        margin-bottom: $spacing-md;
+
+        @include responsive(md) {
+            margin-bottom: $spacing-lg;
+        }
 
         input[type="text"] {
             width: 100%;
-            padding: $spacing-md;
+            padding: $spacing-sm $spacing-md;
             border: 2px solid $border-gray;
             border-radius: $radius-md;
-            font-size: 1rem;
+            font-size: 0.9rem;
             font-family: $font-primary;
             transition: all 0.3s ease;
+
+            @include responsive(sm) {
+                padding: $spacing-md;
+                font-size: 1rem;
+            }
 
             &:focus {
                 outline: none;
@@ -54,50 +63,99 @@
 
             &::placeholder {
                 color: $medium-gray;
+                font-size: 0.85rem;
+
+                @include responsive(sm) {
+                    font-size: 0.95rem;
+                }
             }
         }
     }
 
     &__branches {
         @include flex-column;
-        gap: $spacing-sm;
+        gap: $spacing-xs;
+
+        @include responsive(sm) {
+            gap: $spacing-sm;
+        }
 
         label {
             display: flex;
             align-items: center;
-            gap: $spacing-md;
-            font-size: 1rem;
+            gap: $spacing-sm;
+            font-size: 0.9rem;
             color: $dark-gray;
             cursor: pointer;
-            padding: $spacing-sm $spacing-md;
+            padding: $spacing-xs $spacing-sm;
             border-radius: $radius-sm;
             transition: all 0.2s ease;
             user-select: none;
+
+            @include responsive(sm) {
+                gap: $spacing-md;
+                font-size: 0.95rem;
+                padding: $spacing-sm $spacing-md;
+            }
+
+            @include responsive(md) {
+                font-size: 1rem;
+            }
 
             &:hover {
                 background: rgba($primary-red, 0.05);
             }
 
+            &:active {
+                background: rgba($primary-red, 0.1);
+            }
+
             input[type="checkbox"] {
-                width: 18px;
-                height: 18px;
+                width: 16px;
+                height: 16px;
                 cursor: pointer;
                 accent-color: $primary-red;
                 flex-shrink: 0;
+
+                @include responsive(sm) {
+                    width: 18px;
+                    height: 18px;
+                }
             }
 
             span {
                 flex: 1;
                 font-weight: $font-weight-medium;
+                line-height: 1.4;
             }
         }
     }
 
-    @media (max-width: 768px) {
+    // Mobile responsive
+    @include mobile-only {
         position: relative;
         top: 0;
         width: 100%;
         max-height: none;
+        margin-top: $spacing-lg;
         margin-bottom: $spacing-lg;
+        padding: $spacing-lg;
+        box-shadow: $shadow-sm;
+    }
+
+    @include tablet-down {
+        position: relative;
+        top: 0;
+        width: 100%;
+        max-height: none;
+        margin-top: $spacing-xl;
+        margin-bottom: $spacing-lg;
+    }
+
+    @include responsive(lg) {
+        position: sticky;
+        top: 70px;
+        width: 300px;
+        margin-top: 5rem;
     }
 }

@@ -28,12 +28,13 @@
         color: $primary-white;
 
         &-icon {
-            width: 40px;
-            height: 40px;
+            width: 32px;
+            height: 32px;
             border-radius: 50%;
             overflow: hidden;
             border: 2px solid $primary-white;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+            flex-shrink: 0;
 
             img {
                 width: 100%;
@@ -43,6 +44,11 @@
             }
 
             @include responsive(sm) {
+                width: 40px;
+                height: 40px;
+            }
+
+            @include responsive(md) {
                 width: 45px;
                 height: 45px;
             }
@@ -50,11 +56,20 @@
 
         &-text {
             font-family: $font-primary;
-            font-size: 1.25rem;
+            font-size: 1rem;
             font-weight: $font-weight-bold;
             text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 
+            @include mobile-only {
+                display: none;
+            }
+
             @include responsive(sm) {
+                display: inline;
+                font-size: 1.25rem;
+            }
+
+            @include responsive(md) {
                 font-size: 1.5rem;
             }
         }
@@ -65,41 +80,72 @@
         text-align: center;
         color: $primary-white;
         font-family: $font-primary;
-        font-size: 1.1rem;
+        font-size: 0.85rem;
         font-weight: $font-weight-bold;
         margin: 0;
         text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-        padding: 0 $spacing-md;
+        padding: 0 $spacing-xs;
+        line-height: 1.2;
 
         @include responsive(sm) {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            padding: 0 $spacing-sm;
         }
 
         @include responsive(md) {
+            font-size: 1.3rem;
+            padding: 0 $spacing-md;
+        }
+
+        @include responsive(lg) {
             font-size: 1.5rem;
+        }
+
+        @include mobile-only {
+            // Truncate text on very small screens
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
         }
     }
 
     &__actions {
         @include flex-center;
-        margin-right: -120px;
-        gap: $spacing-md;
+        gap: $spacing-xs;
+        margin-right: 0;
+
+        @include responsive(sm) {
+            gap: $spacing-sm;
+        }
+
+        @include responsive(md) {
+            gap: $spacing-md;
+            margin-right: -120px;
+        }
     }
 
     &__nav {
         @include flex-center;
-        gap: $spacing-md;
+        gap: $spacing-xs;
+
+        @include responsive(sm) {
+            gap: $spacing-sm;
+        }
+
+        @include responsive(md) {
+            gap: $spacing-md;
+        }
     }
 
     &__nav-link {
         @include flex-center;
         gap: $spacing-xs;
-        padding: $spacing-sm $spacing-md;
+        padding: $spacing-xs $spacing-sm;
         color: $primary-white;
         text-decoration: none;
-        font-size: 0.9rem;
+        font-size: 0.75rem;
         font-weight: $font-weight-medium;
-        border-radius: $radius-md;
+        border-radius: $radius-sm;
         transition: all 0.3s ease;
         background: rgba($primary-white, 0.1);
         backdrop-filter: blur(5px);
@@ -107,7 +153,42 @@
         white-space: nowrap;
 
         span {
-            font-size: 1.1rem;
+            font-size: 0.9rem;
+
+            @include responsive(sm) {
+                font-size: 1rem;
+            }
+
+            @include responsive(md) {
+                font-size: 1.1rem;
+            }
+        }
+
+        // Hide text on mobile, show only icon
+        @include mobile-only {
+            padding: $spacing-xs;
+            font-size: 0;
+            min-width: 32px;
+            justify-content: center;
+
+            span {
+                font-size: 1.1rem;
+            }
+        }
+
+        @include responsive(sm) {
+            font-size: 0.85rem;
+            padding: $spacing-sm $spacing-md;
+            border-radius: $radius-md;
+        }
+
+        @include responsive(md) {
+            font-size: 0.9rem;
+        }
+
+        @include responsive(lg) {
+            font-size: 1rem;
+            padding: $spacing-sm $spacing-lg;
         }
 
         &:hover {
@@ -127,23 +208,22 @@
                 transform: translateY(-2px);
             }
         }
-
-        @include responsive(sm) {
-            font-size: 1rem;
-            padding: $spacing-sm $spacing-lg;
-        }
     }
 }
 
 // Navbar height compensation for other components
 .navbar-spacer {
-    height: 55px;
+    height: 48px;
 
     @include responsive(sm) {
-        height: 65px;
+        height: 56px;
     }
 
     @include responsive(md) {
+        height: 65px;
+    }
+
+    @include responsive(lg) {
         height: 75px;
     }
 }

@@ -110,7 +110,7 @@ export default function SkillLevel() {
                         <tr>
                             <th>Trình độ</th>
                             <th>Hạng</th>
-                            <th>Thời gian (phút)</th>
+                            <th>Thời gian (giây)</th>
                             <th>Số lần rút gối</th>
                             <th>Trung bình 10s</th>
                         </tr>
