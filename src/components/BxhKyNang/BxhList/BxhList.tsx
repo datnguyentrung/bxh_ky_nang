@@ -26,7 +26,32 @@ export default function BxhList({ players, hasFilterName }: Props) {
 
     return (
         <div className="bxh-list">
-            {players.map(renderPlayerRow)}
+            {players
+                .sort((a, b) => {
+                    // 1. Accept: true trước, false sau
+                    if (a.accept !== b.accept) {
+                        return a.accept ? -1 : 1;
+                    }
+
+                    // 2. Level: lớn đến bé
+                    if (a.level !== b.level) {
+                        return b.level - a.level;
+                    }
+
+                    // 3. Duration: lớn đến bé
+                    if (a.duration !== b.duration) {
+                        return b.duration - a.duration;
+                    }
+
+                    // 4. Amount: lớn đến bé
+                    if (a.amount !== b.amount) {
+                        return b.amount - a.amount;
+                    }
+
+                    // 5. Date: bé đến lớn (ngày cũ trước)
+                    return new Date(a.date).getTime() - new Date(b.date).getTime();
+                })
+                .map(renderPlayerRow)}
         </div>
     );
 }
