@@ -137,6 +137,10 @@
         }
     }
 
+    &__nav-dropdown {
+        position: relative;
+    }
+
     &__nav-link {
         @include flex-center;
         gap: $spacing-xs;
@@ -151,6 +155,7 @@
         backdrop-filter: blur(5px);
         border: 1px solid rgba($primary-white, 0.2);
         white-space: nowrap;
+        cursor: pointer;
 
         span {
             font-size: 0.9rem;
@@ -208,6 +213,81 @@
                 transform: translateY(-2px);
             }
         }
+
+        &--dropdown {
+            display: flex;
+            align-items: center;
+            gap: $spacing-xs;
+        }
+    }
+
+    &__dropdown-arrow {
+        font-size: 0.6rem;
+        transition: transform 0.3s ease;
+
+        @include mobile-only {
+            display: none;
+        }
+
+        &--open {
+            transform: rotate(180deg);
+        }
+    }
+
+    &__dropdown-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        min-width: 280px;
+        background: white;
+        border-radius: $radius-md;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        z-index: 1000;
+        animation: dropdown-fade-in 0.2s ease;
+        margin-top: 2px;
+
+        @include mobile-only {
+            min-width: 200px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    }
+
+    &__dropdown-item {
+        display: block;
+        padding: $spacing-sm $spacing-md;
+        color: $dark-gray;
+        text-decoration: none;
+        font-size: 0.9rem;
+        font-weight: $font-weight-medium;
+        transition: all 0.2s ease;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        @include responsive(sm) {
+            padding: $spacing-md $spacing-lg;
+            font-size: 0.95rem;
+        }
+
+        &:hover {
+            background: linear-gradient(135deg, rgba($primary-red, 0.05), rgba($secondary-red, 0.05));
+            padding-left: calc($spacing-md + 8px);
+
+            @include responsive(sm) {
+                padding-left: calc($spacing-lg + 8px);
+            }
+        }
+
+        &--active {
+            background: linear-gradient(135deg, rgba($primary-red, 0.1), rgba($secondary-red, 0.1));
+            color: $primary-red;
+            font-weight: $font-weight-bold;
+            border-left: 3px solid $primary-red;
+        }
     }
 }
 
@@ -225,5 +305,17 @@
 
     @include responsive(lg) {
         height: 75px;
+    }
+}
+
+@keyframes dropdown-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }

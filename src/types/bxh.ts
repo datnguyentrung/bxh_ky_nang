@@ -9,6 +9,8 @@ export interface Bxh {
     hlv: string;
     accept: boolean;
     rank?: number;
+    birthYear?: number;
+    belt?: string;
 }
 
 export interface TheLuc {
